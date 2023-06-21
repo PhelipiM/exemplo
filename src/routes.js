@@ -2,14 +2,27 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {MaterialIcons } from '@expo/vector-icons';
-
+import { createStackNavigator } from '@react-navigation/stack';
+ 
 import Home from './pages/Home';
 import Busca from  './pages/Busca';
 import Perfil from  './pages/Perfil';
 import Pedidos from  './pages/Pedidos';
-import Carteira from  './pages/Carteira';
+// import Carteira from  './pages/Carteira';
+import Pagamentos from './pages/Pagamentos';
 
 const BottomTab = createBottomTabNavigator();
+
+const PerfilStack = createStackNavigator();
+
+function PerfilRoutes() {
+  return (
+    <PerfilStack.Navigator>
+      <PerfilStack.Screen name="Perfil" component={Perfil} />
+      <PerfilStack.Screen name="Pagamentos" component={Pagamentos} />
+    </PerfilStack.Navigator>
+  );
+} 
 
 export default function Routes(){
     return ( 
@@ -54,6 +67,17 @@ export default function Routes(){
                             <MaterialIcons name="search" color={color} size={26} />
                             ),
                     }}            
+                />
+                <BottomTab.Screen
+                    name="PerfilRoutes"
+                    component={PerfilRoutes}
+                    options={{
+                        headerShown: false,
+                        tabBarLabel: 'Perfil',
+                        tabBarIcon: ({ color }) => (
+                            <MaterialIcons name="person" color={color} size={26} />
+                            ),
+                    }}
                 />
             </BottomTab.Navigator>
         </NavigationContainer>
