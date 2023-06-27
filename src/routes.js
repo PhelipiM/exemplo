@@ -3,13 +3,30 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {MaterialIcons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
- 
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+const Tab = createMaterialTopTabNavigator();
+
+function PedidosRouter() {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen name="Pedidos" component={Pedidos} />
+        <Tab.Screen
+          name="PedidosAnteriores"
+          component={PedidosAnteriores}
+          options={{ tabBarLabel: 'Pedidos Anteriores' }}
+        />
+      </Tab.Navigator>
+    );
+  }
+
 import Home from './pages/Home';
 import Busca from  './pages/Busca';
 import Perfil from  './pages/Perfil';
 import Pedidos from  './pages/Pedidos';
 // import Carteira from  './pages/Carteira';
 import Pagamentos from './pages/Pagamentos';
+import PedidosAnteriores from "./pages/PedidosAnteriores";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -48,15 +65,15 @@ export default function Routes(){
                             ),
                     }}            
                 />
-                <BottomTab.Screen
-                    name="Pedidos"
-                    component={Pedidos}
-                    options={{
-                        tabBarlabel: 'Pedidos',
-                        tabBarIcon: ({ color }) => (
-                            <MaterialIcons name="assignment" color={color} size={26} />
-                            ),
-                    }}            
+                 <BottomTab.Screen
+                  name="Pedidos"
+                  component={PedidosRouter}
+                  options={{
+                    tabBarLabel: 'Pedidos',
+                    tabBarIcon: ({ color }) => (
+                      <MaterialIcons name="assignment" color={color} size={26} />
+                    ),
+                  }}
                 />
                 <BottomTab.Screen
                     name="Busca"
